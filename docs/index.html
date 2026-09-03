@@ -5,47 +5,203 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Predictive Content Decay & Opportunity Scoring Engine</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #1f2937; max-width: 900px; margin: 0 auto; padding: 2rem; }
-        h1 { color: #1e3a8a; border-bottom: 2px solid #e5e7eb; padding-bottom: 0.5rem; }
-        h2 { color: #2563eb; margin-top: 2rem; border-bottom: 1px solid #f3f4f6; padding-bottom: 0.3rem; }
-        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
-        th, td { border: 1px solid #e5e7eb; padding: 0.75rem; text-align: left; }
-        th { background-color: #f9fafb; font-weight: 600; }
-        .highlight { background-color: #f0fdf4; border-left: 4px solid #16a34a; padding: 1rem; margin: 1rem 0; }
-        .tier { font-weight: bold; padding: 0.2rem 0.5rem; border-radius: 4px; display: inline-block; }
-        .tier-1 { background-color: #fee2e2; color: #991b1b; }
-        .tier-2 { background-color: #fef3c7; color: #92400e; }
-        .tier-3 { background-color: #e0e7ff; color: #3730a3; }
-        .tier-4 { background-color: #f3f4f6; color: #374151; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                         Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h1 {
+            color: #1e3a8a;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0.5rem;
+        }
+
+        h2 {
+            color: #2563eb;
+            margin-top: 2rem;
+            border-bottom: 1px solid #f3f4f6;
+            padding-bottom: 0.3rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            border: 1px solid #e5e7eb;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f9fafb;
+            font-weight: 600;
+        }
+
+        .highlight {
+            background-color: #f0fdf4;
+            border-left: 4px solid #16a34a;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .tier {
+            font-weight: bold;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .tier-1 {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        .tier-2 {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+
+        .tier-3 {
+            background-color: #e0e7ff;
+            color: #3730a3;
+        }
+
+        .tier-4 {
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+
+        .links {
+            margin-top: 1rem;
+        }
+
+        .links a {
+            display: inline-block;
+            margin-right: 1rem;
+        }
     </style>
 </head>
+
 <body>
 
     <h1>Predictive Content Decay & Opportunity Scoring Engine</h1>
-    <p><strong>Author:</strong> Aryean Kundu | <strong>Track:</strong> Refresh / Content Opportunity Scoring</p>
+
+    <p>
+        <strong>Author:</strong> Jishnu Roy |
+        <strong>Track:</strong> Refresh / Content Opportunity Scoring
+    </p>
+
+    <div class="links">
+        <p>
+            <strong>GitHub Repository:</strong>
+            <a href="https://github.com/Mirageroy-dev/flyrank-ml-internship"
+               target="_blank">
+               github.com/Mirageroy-dev/flyrank-ml-internship
+            </a>
+        </p>
+
+        <p>
+            <strong>Deployed Project:</strong>
+            <a href="https://mirageroy-dev.github.io/flyrank-ml-internship/"
+               target="_blank">
+               View Deployed Project
+            </a>
+        </p>
+    </div>
 
     <h2>1. Abstract</h2>
-    <p>Unmonitored organic search traffic decay leads to substantial visibility loss before manual audits identify underperforming assets. This research presents a machine learning pipeline utilizing DuckDB and LightGBM to forecast page-level traffic decay (&ge;20% decline) 30 days in advance. Operating on a time-aware out-of-time test split, the model achieved an <strong>ROC-AUC of 0.812</strong> (+39.5% lift over baseline) and a <strong>Precision @ Top 10% of 0.684</strong>. Outputs are mapped into a 4-tier decision-support playbook to automate editorial refresh workflows.</p>
+
+    <p>
+        Unmonitored organic search traffic decay leads to substantial
+        visibility loss before manual audits identify underperforming assets.
+        This research presents a machine learning pipeline utilizing DuckDB
+        and LightGBM to forecast page-level traffic decay (&ge;20% decline)
+        30 days in advance.
+    </p>
+
+    <p>
+        Operating on a time-aware out-of-time test split, the model achieved
+        an <strong>ROC-AUC of 0.812</strong> (+39.5% lift over baseline)
+        and a <strong>Precision @ Top 10% of 0.684</strong>.
+        Outputs are mapped into a 4-tier decision-support playbook to
+        automate editorial refresh workflows.
+    </p>
 
     <h2>2. Question & Decision Supported</h2>
-    <p><strong>Research Question:</strong> Can rolling impression slopes, click-through rate (CTR) volatility, and position drift predict page-level search performance decay 30 days in advance?</p>
-    <p><strong>Decision Supported:</strong> Operationalizes automated content governance for editorial and SEO teams, replacing reactive site audits with proactive content updates and search intent re-alignment.</p>
+
+    <p>
+        <strong>Research Question:</strong>
+        Can rolling impression slopes, click-through rate (CTR) volatility,
+        and position drift predict page-level search performance decay
+        30 days in advance?
+    </p>
+
+    <p>
+        <strong>Decision Supported:</strong>
+        Operationalizes automated content governance for editorial and SEO
+        teams, replacing reactive site audits with proactive content updates
+        and search intent re-alignment.
+    </p>
 
     <h2>3. Data Ingestion & Safety</h2>
+
     <ul>
-        <li><strong>Source:</strong> FlyRank ML Internship Warehouse Release accessed via DuckDB.</li>
-        <li><strong>Lookback Window:</strong> $T-60$ days to $T$ | <strong>Target Window:</strong> $T$ to $T+30$ days.</li>
-        <li><strong>Data Safety:</strong> Filters out utility endpoints (&lt;50 monthly impressions). All client identifiers, domains, and raw search queries are stripped or pseudonymized.</li>
+        <li>
+            <strong>Source:</strong>
+            FlyRank ML Internship Warehouse Release accessed via DuckDB.
+        </li>
+
+        <li>
+            <strong>Lookback Window:</strong>
+            $T-60$ days to $T$ |
+            <strong>Target Window:</strong>
+            $T$ to $T+30$ days.
+        </li>
+
+        <li>
+            <strong>Data Safety:</strong>
+            Filters out utility endpoints (&lt;50 monthly impressions).
+            All client identifiers, domains, and raw search queries are
+            stripped or pseudonymized.
+        </li>
     </ul>
 
     <h2>4. Methodology & Leakage Prevention</h2>
+
     <ul>
-        <li><strong>Label Definition:</strong> Binary flag ($Y=1$) if organic traffic decays by &ge;20% over the next 30 days.</li>
-        <li><strong>Leakage Prevention:</strong> Label-derived fields (`trend_direction`, `trend_pct`) were explicitly excluded from the feature matrix. Features are calculated exclusively prior to date $T$.</li>
-        <li><strong>Validation Design:</strong> Strict Out-of-Time Temporal Split (Train on historical months 1–4, validate on months 5–6).</li>
+        <li>
+            <strong>Label Definition:</strong>
+            Binary flag ($Y=1$) if organic traffic decays by &ge;20%
+            over the next 30 days.
+        </li>
+
+        <li>
+            <strong>Leakage Prevention:</strong>
+            Label-derived fields
+            (<code>trend_direction</code>,
+            <code>trend_pct</code>)
+            were explicitly excluded from the feature matrix.
+            Features are calculated exclusively prior to date $T$.
+        </li>
+
+        <li>
+            <strong>Validation Design:</strong>
+            Strict Out-of-Time Temporal Split
+            (Train on historical months 1–4,
+            validate on months 5–6).
+        </li>
     </ul>
 
     <h2>5. Results (vs Baseline)</h2>
+
     <table>
         <thead>
             <tr>
@@ -55,6 +211,7 @@
                 <th>F1 Score</th>
             </tr>
         </thead>
+
         <tbody>
             <tr>
                 <td>Historical Trend Heuristic (Baseline)</td>
