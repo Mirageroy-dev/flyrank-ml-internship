@@ -1,217 +1,1075 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predictive Content Decay & Opportunity Scoring Engine</title>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Predictive Content Decay & Opportunity Scoring Engine
+    </title>
+
     <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                         Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.6;
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+
+            line-height: 1.7;
+
             color: #1f2937;
-            max-width: 900px;
+
+            background: #f8fafc;
+
+            max-width: 1000px;
+
             margin: 0 auto;
+
             padding: 2rem;
+        }
+
+        .container {
+            background: #ffffff;
+
+            padding: 2rem;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.08);
         }
 
         h1 {
             color: #1e3a8a;
-            border-bottom: 2px solid #e5e7eb;
-            padding-bottom: 0.5rem;
+
+            border-bottom:
+                3px solid #2563eb;
+
+            padding-bottom: 0.75rem;
+
+            margin-bottom: 1rem;
         }
 
         h2 {
             color: #2563eb;
-            margin-top: 2rem;
-            border-bottom: 1px solid #f3f4f6;
-            padding-bottom: 0.3rem;
+
+            margin-top: 2.5rem;
+
+            border-bottom:
+                1px solid #e5e7eb;
+
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: #374151;
+
+            margin-top: 1.5rem;
+        }
+
+        p {
+            margin: 0.8rem 0;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.7rem;
         }
 
         table {
             width: 100%;
+
             border-collapse: collapse;
-            margin: 1rem 0;
+
+            margin: 1.5rem 0;
+
+            background: white;
         }
 
-        th, td {
-            border: 1px solid #e5e7eb;
+        th,
+        td {
+            border:
+                1px solid #e5e7eb;
+
             padding: 0.75rem;
+
             text-align: left;
         }
 
         th {
-            background-color: #f9fafb;
-            font-weight: 600;
+            background: #eff6ff;
+
+            color: #1e3a8a;
+
+            font-weight: 700;
+        }
+
+        tr:nth-child(even) {
+            background: #f9fafb;
         }
 
         .highlight {
-            background-color: #f0fdf4;
-            border-left: 4px solid #16a34a;
+            background: #f0fdf4;
+
+            border-left:
+                5px solid #16a34a;
+
             padding: 1rem;
-            margin: 1rem 0;
+
+            margin: 1.5rem 0;
+
+            border-radius: 6px;
+        }
+
+        .warning {
+            background: #fff7ed;
+
+            border-left:
+                5px solid #f97316;
+
+            padding: 1rem;
+
+            margin: 1.5rem 0;
+
+            border-radius: 6px;
+        }
+
+        .links {
+            background: #eff6ff;
+
+            padding: 1rem 1.25rem;
+
+            border-radius: 8px;
+
+            margin: 1.5rem 0;
+        }
+
+        .links p {
+            margin: 0.5rem 0;
+        }
+
+        a {
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-weight: 600;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        code {
+            background: #f3f4f6;
+
+            padding: 0.2rem 0.4rem;
+
+            border-radius: 4px;
+
+            font-family:
+                Consolas,
+                Monaco,
+                monospace;
         }
 
         .tier {
             font-weight: bold;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
+
+            padding: 0.3rem 0.6rem;
+
+            border-radius: 5px;
+
             display: inline-block;
         }
 
         .tier-1 {
-            background-color: #fee2e2;
+            background: #fee2e2;
+
             color: #991b1b;
         }
 
         .tier-2 {
-            background-color: #fef3c7;
+            background: #fef3c7;
+
             color: #92400e;
         }
 
         .tier-3 {
-            background-color: #e0e7ff;
+            background: #e0e7ff;
+
             color: #3730a3;
         }
 
         .tier-4 {
-            background-color: #f3f4f6;
+            background: #f3f4f6;
+
             color: #374151;
         }
 
-        .links {
-            margin-top: 1rem;
+        .footer {
+            margin-top: 3rem;
+
+            padding-top: 1rem;
+
+            border-top:
+                1px solid #e5e7eb;
+
+            color: #6b7280;
+
+            text-align: center;
+
+            font-size: 0.9rem;
         }
 
-        .links a {
-            display: inline-block;
-            margin-right: 1rem;
-        }
     </style>
 </head>
 
+
 <body>
 
-    <h1>Predictive Content Decay & Opportunity Scoring Engine</h1>
+<div class="container">
+
+
+    <!-- PROJECT HEADER -->
+
+    <h1>
+        🚀 Predictive Content Decay & Opportunity Scoring Engine
+    </h1>
+
 
     <p>
-        <strong>Author:</strong> Jishnu Roy |
-        <strong>Track:</strong> Refresh / Content Opportunity Scoring
+
+        <strong>Author:</strong>
+        Jishnu Roy
+
+        |
+
+        <strong>Track:</strong>
+        Refresh / Content Opportunity Scoring
+
     </p>
+
+
+    <!-- PROJECT LINKS -->
 
     <div class="links">
-        <p>
-            <strong>GitHub Repository:</strong>
-            <a href="https://github.com/Mirageroy-dev/flyrank-ml-internship"
-               target="_blank">
-               github.com/Mirageroy-dev/flyrank-ml-internship
-            </a>
-        </p>
 
         <p>
-            <strong>Deployed Project:</strong>
-            <a href="https://mirageroy-dev.github.io/flyrank-ml-internship/"
-               target="_blank">
-               View Deployed Project
+
+            <strong>
+                GitHub Repository:
+            </strong>
+
+            <br>
+
+            <a
+                href="https://github.com/Mirageroy-dev/flyrank-ml-internship"
+                target="_blank">
+
+                github.com/Mirageroy-dev/flyrank-ml-internship
+
             </a>
+
         </p>
+
+
+        <p>
+
+            <strong>
+                Deployed Project:
+            </strong>
+
+            <br>
+
+            <a
+                href="https://mirageroy-dev.github.io/flyrank-ml-internship/"
+                target="_blank">
+
+                View Deployed Project
+
+            </a>
+
+        </p>
+
     </div>
 
-    <h2>1. Abstract</h2>
+
+
+    <!-- ABSTRACT -->
+
+    <h2>
+        1. Abstract
+    </h2>
+
 
     <p>
-        Unmonitored organic search traffic decay leads to substantial
-        visibility loss before manual audits identify underperforming assets.
-        This research presents a machine learning pipeline utilizing DuckDB
-        and LightGBM to forecast page-level traffic decay (&ge;20% decline)
-        30 days in advance.
+
+        Unmonitored organic search traffic decay can lead to substantial
+        visibility loss before manual audits identify underperforming
+        content assets.
+
     </p>
+
 
     <p>
-        Operating on a time-aware out-of-time test split, the model achieved
-        an <strong>ROC-AUC of 0.812</strong> (+39.5% lift over baseline)
-        and a <strong>Precision @ Top 10% of 0.684</strong>.
-        Outputs are mapped into a 4-tier decision-support playbook to
-        automate editorial refresh workflows.
+
+        This research presents a machine learning pipeline utilizing
+        DuckDB and LightGBM to forecast page-level traffic decay
+        of at least 20% over a 30-day period.
+
     </p>
 
-    <h2>2. Question & Decision Supported</h2>
 
     <p>
-        <strong>Research Question:</strong>
-        Can rolling impression slopes, click-through rate (CTR) volatility,
-        and position drift predict page-level search performance decay
-        30 days in advance?
+
+        Operating on a time-aware out-of-time validation split,
+        the model achieved an
+        <strong>ROC-AUC of 0.812</strong>
+        and a
+        <strong>Precision @ Top 10% of 0.684</strong>.
+
     </p>
+
+
+    <div class="highlight">
+
+        <strong>
+            Project Goal:
+        </strong>
+
+        Build a decision-support system that identifies content pages
+        requiring review and ranks them according to predicted
+        decay risk and opportunity.
+
+    </div>
+
+
+
+    <!-- QUESTION -->
+
+    <h2>
+        2. Research Question & Decision Supported
+    </h2>
+
 
     <p>
-        <strong>Decision Supported:</strong>
-        Operationalizes automated content governance for editorial and SEO
-        teams, replacing reactive site audits with proactive content updates
-        and search intent re-alignment.
+
+        <strong>
+            Research Question:
+        </strong>
+
+        Can rolling impression trends, click-through rate volatility,
+        and position movement help predict page-level search performance
+        decay in advance?
+
     </p>
 
-    <h2>3. Data Ingestion & Safety</h2>
+
+    <p>
+
+        <strong>
+            Decision Supported:
+        </strong>
+
+        The system supports editorial and SEO workflows by helping
+        prioritize pages that may require refresh, improvement,
+        protection, monitoring, or further review.
+
+    </p>
+
+
+
+    <!-- DATA -->
+
+    <h2>
+        3. Data Ingestion & Safety
+    </h2>
+
 
     <ul>
-        <li>
-            <strong>Source:</strong>
-            FlyRank ML Internship Warehouse Release accessed via DuckDB.
-        </li>
 
         <li>
-            <strong>Lookback Window:</strong>
-            $T-60$ days to $T$ |
-            <strong>Target Window:</strong>
-            $T$ to $T+30$ days.
+
+            <strong>
+                Data Source:
+            </strong>
+
+            FlyRank ML Internship Warehouse Release.
+
         </li>
 
+
         <li>
-            <strong>Data Safety:</strong>
-            Filters out utility endpoints (&lt;50 monthly impressions).
-            All client identifiers, domains, and raw search queries are
-            stripped or pseudonymized.
+
+            <strong>
+                Data Processing:
+            </strong>
+
+            Data was accessed and processed using DuckDB and
+            structured analytical workflows.
+
         </li>
+
+
+        <li>
+
+            <strong>
+                Feature Window:
+            </strong>
+
+            Historical performance information is used to construct
+            predictive features.
+
+        </li>
+
+
+        <li>
+
+            <strong>
+                Privacy & Safety:
+            </strong>
+
+            The project avoids exposing private client information,
+            raw URLs, domains, or sensitive search queries.
+
+        </li>
+
     </ul>
 
-    <h2>4. Methodology & Leakage Prevention</h2>
+
+
+    <!-- METHODOLOGY -->
+
+    <h2>
+        4. Methodology & Leakage Prevention
+    </h2>
+
+
+    <h3>
+        Predictive Pipeline
+    </h3>
+
 
     <ul>
-        <li>
-            <strong>Label Definition:</strong>
-            Binary flag ($Y=1$) if organic traffic decays by &ge;20%
-            over the next 30 days.
-        </li>
 
         <li>
-            <strong>Leakage Prevention:</strong>
-            Label-derived fields
-            (<code>trend_direction</code>,
-            <code>trend_pct</code>)
-            were explicitly excluded from the feature matrix.
-            Features are calculated exclusively prior to date $T$.
+
+            Historical content performance data is collected.
+
         </li>
 
+
         <li>
-            <strong>Validation Design:</strong>
-            Strict Out-of-Time Temporal Split
-            (Train on historical months 1–4,
-            validate on months 5–6).
+
+            Time-based features are created from observable
+            search performance signals.
+
         </li>
+
+
+        <li>
+
+            A baseline approach is used for comparison.
+
+        </li>
+
+
+        <li>
+
+            A LightGBM model is trained to rank potential
+            content opportunities.
+
+        </li>
+
+
+        <li>
+
+            Model predictions are converted into actionable
+            review recommendations.
+
+        </li>
+
     </ul>
 
-    <h2>5. Results (vs Baseline)</h2>
+
+
+    <h3>
+        Leakage Prevention
+    </h3>
+
+
+    <p>
+
+        Data leakage was treated as a critical modeling risk.
+
+        Features were designed so that information from the future
+        target period was not included in the prediction process.
+
+    </p>
+
+
+    <ul>
+
+        <li>
+
+            Features are calculated from historical information.
+
+        </li>
+
+
+        <li>
+
+            Target-related fields are excluded from the feature matrix.
+
+        </li>
+
+
+        <li>
+
+            Validation follows a time-aware design.
+
+        </li>
+
+
+        <li>
+
+            The model is evaluated on later data rather than randomly
+            mixing future observations into training data.
+
+        </li>
+
+    </ul>
+
+
+
+    <!-- RESULTS -->
+
+    <h2>
+        5. Results vs Baseline
+    </h2>
+
 
     <table>
+
         <thead>
+
             <tr>
-                <th>Model Architecture</th>
-                <th>Precision @ Top 10%</th>
-                <th>ROC-AUC</th>
-                <th>F1 Score</th>
+
+                <th>
+                    Model Architecture
+                </th>
+
+                <th>
+                    Precision @ Top 10%
+                </th>
+
+                <th>
+                    ROC-AUC
+                </th>
+
+                <th>
+                    Evaluation
+                </th>
+
             </tr>
+
         </thead>
 
+
         <tbody>
+
             <tr>
-                <td>Historical Trend Heuristic (Baseline)</td>
+
+                <td>
+                    Historical Trend Heuristic
+                    (Baseline)
+                </td>
+
+                <td>
+                    0.620
+                </td>
+
+                <td>
+                    0.582
+                </td>
+
+                <td>
+                    Rule-based baseline
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td>
+                    LightGBM Predictive Model
+                </td>
+
+                <td>
+                    <strong>0.684</strong>
+                </td>
+
+                <td>
+                    <strong>0.812</strong>
+                </td>
+
+                <td>
+                    Improved predictive ranking
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+
+
+    <div class="highlight">
+
+        <strong>
+            Key Finding:
+        </strong>
+
+        The predictive model demonstrated stronger ranking performance
+        than the baseline approach, showing that combining multiple
+        historical performance signals can improve content review
+        prioritization.
+
+    </div>
+
+
+
+    <!-- FEATURES -->
+
+    <h2>
+        6. Key Predictive Signals
+    </h2>
+
+
+    <p>
+
+        The analysis considers observable search performance signals
+        that may indicate changes in content visibility.
+
+    </p>
+
+
+    <ul>
+
+        <li>
+            Historical impressions
+        </li>
+
+        <li>
+            Historical clicks
+        </li>
+
+        <li>
+            Click-through rate movement
+        </li>
+
+        <li>
+            Search position changes
+        </li>
+
+        <li>
+            Trend direction
+        </li>
+
+        <li>
+            Performance volatility
+        </li>
+
+        <li>
+            Historical growth or decline patterns
+        </li>
+
+    </ul>
+
+
+
+    <!-- ACTION ENGINE -->
+
+    <h2>
+        7. Opportunity Scoring & Action Engine
+    </h2>
+
+
+    <p>
+
+        Model predictions are converted into a ranked decision-support
+        queue. The goal is not to claim that a content refresh will
+        guarantee recovery.
+
+    </p>
+
+
+    <p>
+
+        Instead, the system identifies pages that deserve human review
+        first based on observable evidence.
+
+    </p>
+
+
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>
+                    Priority Level
+                </th>
+
+                <th>
+                    Recommended Action
+                </th>
+
+                <th>
+                    Interpretation
+                </th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+
+            <tr>
+
+                <td>
+
+                    <span class="tier tier-1">
+                        Tier 1
+                    </span>
+
+                </td>
+
+
+                <td>
+                    Immediate Review
+                </td>
+
+
+                <td>
+                    High-priority content opportunity requiring
+                    closer investigation.
+                </td>
+
+            </tr>
+
+
+
+            <tr>
+
+                <td>
+
+                    <span class="tier tier-2">
+                        Tier 2
+                    </span>
+
+                </td>
+
+
+                <td>
+                    Refresh or Improve
+                </td>
+
+
+                <td>
+                    Content may benefit from updates,
+                    improved relevance, or structural changes.
+                </td>
+
+            </tr>
+
+
+
+            <tr>
+
+                <td>
+
+                    <span class="tier tier-3">
+                        Tier 3
+                    </span>
+
+                </td>
+
+
+                <td>
+                    Monitor
+                </td>
+
+
+                <td>
+                    Signals suggest movement but additional
+                    observation is recommended.
+                </td>
+
+            </tr>
+
+
+
+            <tr>
+
+                <td>
+
+                    <span class="tier tier-4">
+                        Tier 4
+                    </span>
+
+                </td>
+
+
+                <td>
+                    Low Priority
+                </td>
+
+
+                <td>
+                    No immediate action is recommended based
+                    on the current evidence.
+                </td>
+
+            </tr>
+
+
+        </tbody>
+
+    </table>
+
+
+
+    <!-- INTERPRETATION -->
+
+    <h2>
+        8. Interpretation
+    </h2>
+
+
+    <p>
+
+        The predictive system is designed as a decision-support tool
+        rather than a system that guarantees future performance.
+
+    </p>
+
+
+    <p>
+
+        A high-risk prediction means that the observed historical
+        patterns resemble situations associated with future
+        performance decline according to the project's target
+        definition.
+
+    </p>
+
+
+    <div class="warning">
+
+        <strong>
+            Important Limitation:
+        </strong>
+
+        A prediction of content decline does not prove that refreshing
+        the page will cause recovery. Determining causal impact would
+        require an experiment or another appropriate causal analysis.
+
+    </div>
+
+
+
+    <!-- LIMITATIONS -->
+
+    <h2>
+        9. Limitations
+    </h2>
+
+
+    <ul>
+
+        <li>
+
+            The model identifies statistical patterns rather than
+            guaranteed future outcomes.
+
+        </li>
+
+
+        <li>
+
+            Search performance can be affected by external factors
+            not represented in the available data.
+
+        </li>
+
+
+        <li>
+
+            Seasonality and changes in search behavior may influence
+            predictions.
+
+        </li>
+
+
+        <li>
+
+            A predicted opportunity should still be reviewed by a
+            human before making significant editorial decisions.
+
+        </li>
+
+
+        <li>
+
+            The project does not claim to identify Google ranking
+            factors or prove causal relationships.
+
+        </li>
+
+    </ul>
+
+
+
+    <!-- REPRODUCIBILITY -->
+
+    <h2>
+        10. Reproducibility
+    </h2>
+
+
+    <p>
+
+        The project repository contains the notebooks and supporting
+        project structure used throughout the FlyRank Machine Learning
+        Internship.
+
+    </p>
+
+
+    <p>
+
+        <strong>
+            GitHub Repository:
+        </strong>
+
+        <br>
+
+        <a
+            href="https://github.com/Mirageroy-dev/flyrank-ml-internship"
+            target="_blank">
+
+            https://github.com/Mirageroy-dev/flyrank-ml-internship
+
+        </a>
+
+    </p>
+
+
+    <p>
+
+        <strong>
+            Deployed Research Project:
+        </strong>
+
+        <br>
+
+        <a
+            href="https://mirageroy-dev.github.io/flyrank-ml-internship/"
+            target="_blank">
+
+            https://mirageroy-dev.github.io/flyrank-ml-internship/
+
+        </a>
+
+    </p>
+
+
+
+    <!-- CONCLUSION -->
+
+    <h2>
+        11. Conclusion
+    </h2>
+
+
+    <p>
+
+        This project demonstrates how historical search performance
+        signals can be transformed into a machine learning-based
+        decision-support system for content prioritization.
+
+    </p>
+
+
+    <p>
+
+        By combining time-aware feature engineering, leakage-aware
+        validation, predictive modeling, and ranked recommendations,
+        the system provides a structured approach for identifying
+        pages that may deserve editorial attention.
+
+    </p>
+
+
+    <div class="highlight">
+
+        <strong>
+            Final Outcome:
+        </strong>
+
+        A reproducible machine learning workflow that transforms
+        historical content performance signals into ranked,
+        explainable opportunities for human review.
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        <p>
+
+            Built by
+            <strong>Jishnu Roy</strong>
+
+            as part of the
+
+            <strong>
+                FlyRank Machine Learning Internship
+            </strong>.
+
+        </p>
+
+    </div>
+
+
+</div>
+
+</body>
+
+</html>
